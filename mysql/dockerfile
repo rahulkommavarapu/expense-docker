@@ -1,0 +1,6 @@
+# create the mysql instance
+FROM mysql:8.0  
+# Set the Root Password for mysql
+ENV MYSQL_ROOT_PASSWORD=ExpenseApp@1
+# copy the Script from backend.sql
+COPY scripts/*.sql /docker-entrypoint-initdb.d
