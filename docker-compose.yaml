@@ -1,7 +1,7 @@
 networks :
 # the Presence of these objects is sufficient ot define them
 #Network name
-  Expense: {}
+  - Expense: {}
   # Volume and Volume Name
 volumes:
   mysql:
@@ -11,7 +11,7 @@ services:
   mysql:
     image: mysql:1.0.0
     networks:
-      Expense
+     - Expense
     volumes:
       - mysql:/var/lib/mysql  
     container_name: mysql  
@@ -19,7 +19,7 @@ services:
   backend:
     image: backend:1.0.0
     networks:
-       Expense
+      - Expense
     container_name: backend
     depends_on:
       - mysql 
@@ -27,7 +27,7 @@ services:
   frontend:
      image: frontend:1.0.0
      networks:
-       Expense
+      - Expense
      container_name: frontend
      ports: 
       - 80:80
