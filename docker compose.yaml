@@ -1,0 +1,39 @@
+networks :
+# the Presence of these objects is sufficient ot define them
+#Network name
+  Expense: {}
+  # Volume and Volume Name
+volumes:
+  mysql:
+services:
+# Docker run -f --name mysql --network Expense -v mysql/lib/mysql mysql:1.0.0
+#1. Mysql Container
+  mysql:
+    image: mysql:1.0.0
+    networks:
+      Expense
+    volumes:
+      - mysql:/var/lib/mysql  
+    container_name: mysql  
+#2.Backend Container
+  backend:
+    image: backend:1.0.0
+    networks:
+       Expense
+    container_name: backend
+    depends_on:
+      - mysql 
+#3.Frotend Container
+  frontend:
+     image: frontend:1.0.0
+     networks:
+       Expense
+     container_name: frontend
+     ports: 
+      - 80:80
+     depends_on:
+      - backend     
+     
+
+
+
