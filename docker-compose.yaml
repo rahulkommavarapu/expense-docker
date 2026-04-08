@@ -6,11 +6,11 @@ networks :
 volumes:
   mysql:
 services:
-# Docker run -f --name mysql --network Expense -v mysql/lib/mysql mysql
+# Docker run -f --name mysql --network Expense -v mysql/lib/mysql mysql:1.0.0
 #1. Mysql Container
   mysql:
-  # its pull the build every time when we need
-    build: ./mysql
+  # its pull the Image every time when we need
+    image: rahul8096/mysql:1.0.1
     networks:
      - expense
     volumes:
@@ -18,7 +18,7 @@ services:
     container_name: mysql  
 #2.Backend Container
   backend:
-    build: ./backend
+    image: rahul8096/backend:1.0.1
     command: sh -c "sleep 30 && node /opt/backend/index.js"
     networks:
       - expense
@@ -27,7 +27,7 @@ services:
       - mysql 
 #3.Frotend Container
   frontend:
-     build: ./frontend
+     image: rahul8096/frontend:1.0.1
      networks:
       - expense
      container_name: frontend
